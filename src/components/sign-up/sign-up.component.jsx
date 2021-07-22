@@ -7,6 +7,7 @@ import "./sign-up.styles.scss";
 class SignUp extends React.Component {
   constructor() {
     super();
+
     this.state = {
       displayName: "",
       email: "",
@@ -17,17 +18,22 @@ class SignUp extends React.Component {
 
   handleSubmit = async (event) => {
     event.preventDefault();
+
     const { displayName, email, password, confirmPassword } = this.state;
+
     if (password !== confirmPassword) {
-      alert("Passwords do not match.");
+      alert("passwords don't match");
       return;
     }
+
     try {
       const { user } = await auth.createUserWithEmailAndPassword(
         email,
         password
       );
+
       await createUserProfileDocument(user, { displayName });
+
       this.setState({
         displayName: "",
         email: "",
@@ -35,12 +41,13 @@ class SignUp extends React.Component {
         confirmPassword: "",
       });
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
   handleChange = (event) => {
     const { name, value } = event.target;
+
     this.setState({ [name]: value });
   };
 
@@ -48,8 +55,8 @@ class SignUp extends React.Component {
     const { displayName, email, password, confirmPassword } = this.state;
     return (
       <div className="sign-up">
-        <h2 className="title">I do not have an account</h2>
-        <span>Sign up with your email and a password</span>
+        <h2 className="title">I do not have a account</h2>
+        <span>Sign up with your email and password</span>
         <form className="sign-up-form" onSubmit={this.handleSubmit}>
           <FormInput
             type="text"

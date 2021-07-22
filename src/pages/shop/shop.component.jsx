@@ -10,6 +10,7 @@ class ShopPage extends React.Component {
       collections: SHOP_DATA,
     };
   }
+
   render() {
     const { collections } = this.state;
     return (
